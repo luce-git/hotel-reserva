@@ -5,10 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Reserva</title>
 </head>
+
 <body>
 
-    <h1>Hotel Reserva</h1>
-    <p>Bienvenido al sistema de reservas del hotel.</p>
+    <header>
+        <h1>HOTEL RESERVA</h1>
+
+        <nav>
+            <a href="#">Inicio</a>
+            <a href="#">Mis reservas</a>
+            <a href="#">Ayuda</a>
+            <a href="#">Login</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <h2>Encuentra tu habitación</h2>
+
+        <p>Consulta la disponibilidad y realiza tu reserva de manera sencilla.</p>
+
+        <form>
+
+            <label for="entrada">Fecha de entrada:</label>
+            <input type="date" id="entrada" name="entrada">
+
+            <br><br>
+
+            <label for="salida">Fecha de salida:</label>
+            <input type="date" id="salida" name="salida">
+
+            <br><br>
+
+            <label for="huespedes">Número de huéspedes:</label>
+            <input type="number" id="huespedes" name="huespedes" min="1" value="2">
+
+            <br><br>
+
+            <button type="submit">Buscar habitaciones</button>
+
+        </form>
+
+    </main>
+
+    <footer>
+        <p>Hotel Reserva - Sistema de reservas en línea</p>
+    </footer>
 
 </body>
 </html>
