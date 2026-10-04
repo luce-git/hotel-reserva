@@ -246,6 +246,12 @@
         font-size: 55px;
         margin-bottom: 15px;
     }
+   .room-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+   }
 
     .room-card h3 {
         margin-bottom: 8px;
@@ -993,19 +999,19 @@ const rooms = [
         name: "Habitación Estándar",
         capacity: 2,
         price: 180000,
-        icon: "🛏️"
+        image:"imagenes/habitacion-estandar.jpg"
     },
     {
         name: "Habitación Familiar",
         capacity: 4,
         price: 280000,
-        icon: "🛏️"
+        image:"imagenes/habitacion-familiar.jpg"
     },
     {
         name: "Suite",
         capacity: 2,
         price: 400000,
-        icon: "🛏️"
+        image:"imagenes/suite.jpg"
     }
 ];
 
@@ -1097,7 +1103,9 @@ function searchRooms() {
             card.className = "room-card";
 
             card.innerHTML = `
-                <div class="room-image">${room.icon}</div>
+                <div class="room-image">
+                     <img src="${room.image}" alt="${room.name}">
+                </div>
 
                 <h3>${room.name}</h3>
 
