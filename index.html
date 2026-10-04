@@ -1,510 +1,1356 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Reserva</title>
+    <title>Hotel Reservaciones</title>
 
-```
-<style>
-    * {
-        box-sizing: border-box;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f4f6f8;
-        color: #333;
-    }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+        }
 
-    header {
-        background-color: #234e70;
-        color: white;
-        padding: 20px;
-    }
+        /* ENCABEZADO */
+        header {
+            background-color: #234e70;
+            color: white;
+            padding: 18px 30px;
+        }
 
-    header h1 {
-        margin: 0 0 15px 0;
-    }
+        .encabezado {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
 
-    nav a {
-        color: white;
-        text-decoration: none;
-        margin-right: 20px;
-        cursor: pointer;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    nav a:hover {
-        text-decoration: underline;
-    }
+        .logo-icono {
+            font-size: 32px;
+        }
 
-    main {
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 20px;
-    }
+        .logo h1 {
+            margin: 0;
+            font-size: 25px;
+        }
 
-    .panel {
-        background-color: white;
-        padding: 25px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        margin-bottom: 25px;
-    }
+        .menu-superior {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-    h2 {
-        color: #234e70;
-    }
+        .menu-superior a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-    .form-group {
-        margin-bottom: 18px;
-    }
+        .menu-superior a:hover {
+            text-decoration: underline;
+        }
 
-    label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 6px;
-    }
+        /* ESTRUCTURA PRINCIPAL */
+        .contenedor {
+            display: flex;
+            min-height: 650px;
+        }
 
-    input, select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #bbb;
-        border-radius: 5px;
-    }
+        /* MENU LATERAL */
+        aside {
+            width: 220px;
+            background-color: #ffffff;
+            border-right: 1px solid #ddd;
+            padding: 25px 15px;
+        }
 
-    button {
-        background-color: #234e70;
-        color: white;
-        border: none;
-        padding: 11px 18px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        aside h3 {
+            color: #234e70;
+            margin-top: 0;
+        }
 
-    button:hover {
-        background-color: #173852;
-    }
+        .menu-lateral a {
+            display: block;
+            padding: 13px 10px;
+            color: #444;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
 
-    .habitacion {
-        border: 1px solid #ccc;
-        padding: 18px;
-        margin-top: 15px;
-        border-radius: 6px;
-        background-color: #fafafa;
-    }
+        .menu-lateral a:hover {
+            background-color: #e9f0f5;
+            color: #234e70;
+        }
 
-    .habitacion h3 {
-        margin-top: 0;
-        color: #234e70;
-    }
+        /* CONTENIDO */
+        main {
+            flex: 1;
+            padding: 30px;
+        }
 
-    .mensaje {
-        padding: 12px;
-        margin-top: 15px;
-        border-radius: 5px;
-        background-color: #e8f1f8;
-    }
+        .panel {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
 
-    .oculto {
-        display: none;
-    }
+        .oculto {
+            display: none;
+        }
 
-    footer {
-        text-align: center;
-        padding: 20px;
-        background-color: #234e70;
-        color: white;
-        margin-top: 40px;
-    }
+        /* PRESENTACION */
+        .presentacion {
+            background-color: #eeeeee;
+            border-radius: 8px;
+            padding: 35px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-    .reserva {
-        border-left: 5px solid #234e70;
-        background-color: #f8f9fa;
-        padding: 15px;
-        margin-top: 15px;
-    }
+        .presentacion h2 {
+            margin-top: 0;
+            color: #234e70;
+            font-size: 30px;
+        }
 
-    .cancelar {
-        background-color: #a94442;
-        margin-top: 10px;
-    }
+        .presentacion p {
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
 
-    .cancelar:hover {
-        background-color: #843534;
-    }
-</style>
-```
+        /* BUSCADOR */
+        .buscador {
+            background-color: #eeeeee;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 22px;
+        }
 
+        .campos-busqueda {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        button {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #246b45;
+        }
+
+        /* CARACTERISTICAS */
+        .caracteristicas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .caracteristica {
+            background-color: #eeeeee;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .icono {
+            font-size: 30px;
+        }
+
+        .caracteristica h3 {
+            color: #234e70;
+            margin-bottom: 5px;
+        }
+
+        /* HABITACIONES */
+        h2 {
+            color: #234e70;
+        }
+
+        .habitacion {
+            border: 1px solid #ccc;
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 6px;
+            background-color: #fafafa;
+        }
+
+        .habitacion h3 {
+            margin-top: 0;
+            color: #234e70;
+        }
+
+        .precio {
+            font-weight: bold;
+            color: #2e8b57;
+        }
+
+        .mensaje {
+            padding: 14px;
+            margin-top: 18px;
+            border-radius: 5px;
+            background-color: #e8f1f8;
+            border-left: 4px solid #234e70;
+        }
+
+        .reserva {
+            border-left: 5px solid #234e70;
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .cancelar {
+            background-color: #a94442;
+            margin-top: 10px;
+        }
+
+        .cancelar:hover {
+            background-color: #843534;
+        }
+
+        .confirmacion {
+            background-color: #e8f5e9;
+            border-left: 5px solid #2e8b57;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        /* PIE DE PAGINA */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #234e70;
+            color: white;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+
+            .encabezado {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .menu-superior {
+                flex-wrap: wrap;
+            }
+
+            .contenedor {
+                flex-direction: column;
+            }
+
+            aside {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .campos-busqueda {
+                grid-template-columns: 1fr;
+            }
+
+            .caracteristicas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
+<!-- ENCABEZADO -->
 <header>
-    <h1>HOTEL RESERVA</h1>
 
-```
-<nav>
-    <a href="#" onclick="mostrarInicio()">Inicio</a>
-    <a href="#" onclick="mostrarReservas()">Mis reservas</a>
-    <a href="#" onclick="mostrarAyuda()">Ayuda</a>
-    <a href="#" onclick="mostrarLogin()">Login</a>
-</nav>
-```
+    <div class="encabezado">
+
+        <div class="logo">
+            <span class="logo-icono">🏨</span>
+            <h1>HOTEL RESERVACIONES</h1>
+        </div>
+
+        <nav class="menu-superior">
+            <a onclick="mostrarInicio()">Inicio</a>
+            <a onclick="mostrarReservas()">Mis reservas</a>
+            <a onclick="mostrarAyuda()">Ayuda</a>
+            <a onclick="mostrarLogin()">Login</a>
+        </nav>
+
+    </div>
 
 </header>
 
-<main>
 
-```
-<!-- INICIO -->
-<section id="inicio" class="panel">
+<div class="contenedor">
 
-    <h2>Encuentra tu habitación</h2>
+    <!-- MENU LATERAL -->
+    <aside>
 
-    <p>
-        Consulta la disponibilidad y realiza tu reserva de manera sencilla.
-    </p>
+        <h3>Menú</h3>
 
-    <form id="formBusqueda">
+        <nav class="menu-lateral">
 
-        <div class="form-group">
-            <label for="entrada">Fecha de entrada:</label>
-            <input type="date" id="entrada" required>
-        </div>
+            <a onclick="mostrarMensajeMenu('Ofertas especiales')">
+                Ofertas especiales
+            </a>
 
-        <div class="form-group">
-            <label for="salida">Fecha de salida:</label>
-            <input type="date" id="salida" required>
-        </div>
+            <a onclick="mostrarMensajeMenu('Eventos')">
+                Eventos
+            </a>
 
-        <div class="form-group">
-            <label for="huespedes">Número de huéspedes:</label>
-            <input type="number" id="huespedes" min="1" value="2" required>
-        </div>
+            <a onclick="mostrarMensajeMenu('Ubicación')">
+                Ubicación
+            </a>
 
-        <button type="submit">Buscar habitaciones</button>
+            <a onclick="mostrarInicio()">
+                Reservas
+            </a>
 
-    </form>
+            <a onclick="mostrarMensajeMenu('Tipo de habitaciones')">
+                Tipo de habitaciones
+            </a>
 
-    <div id="resultadoBusqueda"></div>
+            <a onclick="mostrarMensajeMenu('Paquetes')">
+                Paquetes
+            </a>
 
-</section>
+        </nav>
 
-
-<!-- FORMULARIO DE RESERVA -->
-<section id="formularioReserva" class="panel oculto">
-
-    <h2>Datos de la reserva</h2>
-
-    <p id="habitacionSeleccionada"></p>
-
-    <div class="form-group">
-        <label for="nombre">Nombre completo:</label>
-        <input type="text" id="nombre" required>
-    </div>
-
-    <div class="form-group">
-        <label for="correo">Correo electrónico:</label>
-        <input type="email" id="correo" required>
-    </div>
-
-    <div class="form-group">
-        <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" required>
-    </div>
-
-    <button onclick="confirmarReserva()">Continuar con la reserva</button>
-
-    <div id="mensajeReserva"></div>
-
-</section>
+    </aside>
 
 
-<!-- MIS RESERVAS -->
-<section id="misReservas" class="panel oculto">
-
-    <h2>Mis reservas</h2>
-
-    <div id="listaReservas">
-        <p>No hay reservas registradas.</p>
-    </div>
-
-</section>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
 
 
-<!-- AYUDA -->
-<section id="ayuda" class="panel oculto">
+        <!-- INICIO -->
+        <section id="inicio" class="panel">
 
-    <h2>Ayuda</h2>
+            <div class="presentacion">
 
-    <p>
-        Para realizar una reserva, seleccione las fechas de entrada y salida,
-        indique el número de huéspedes y pulse "Buscar habitaciones".
-    </p>
+                <h2>Reserva tu habitación</h2>
 
-    <p>
-        Después seleccione una habitación y complete sus datos personales.
-    </p>
-
-</section>
+                <p>
+                    Encuentra el espacio ideal para tus vacaciones
+                </p>
 
 
-<!-- LOGIN SIMULADO -->
-<section id="login" class="panel oculto">
+                <!-- BUSCADOR -->
+                <div class="buscador">
 
-    <h2>Inicio de sesión</h2>
+                    <form id="formBusqueda">
 
-    <div class="form-group">
-        <label for="usuario">Usuario:</label>
-        <input type="text" id="usuario">
-    </div>
+                        <div class="campos-busqueda">
 
-    <div class="form-group">
-        <label for="clave">Contraseña:</label>
-        <input type="password" id="clave">
-    </div>
+                            <div class="form-group">
+                                <label for="entrada">
+                                    Fecha de entrada
+                                </label>
 
-    <button onclick="iniciarSesion()">Ingresar</button>
+                                <input
+                                    type="date"
+                                    id="entrada"
+                                    required
+                                >
+                            </div>
 
-    <div id="mensajeLogin"></div>
 
-</section>
-```
+                            <div class="form-group">
+                                <label for="salida">
+                                    Fecha de salida
+                                </label>
 
-</main>
+                                <input
+                                    type="date"
+                                    id="salida"
+                                    required
+                                >
+                            </div>
 
+
+                            <div class="form-group">
+                                <label for="huespedes">
+                                    Huéspedes
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="huespedes"
+                                    min="1"
+                                    max="4"
+                                    value="2"
+                                    required
+                                >
+                            </div>
+
+
+                            <div>
+                                <button type="submit">
+                                    Buscar habitaciones
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- CARACTERISTICAS -->
+                <div class="caracteristicas">
+
+                    <div class="caracteristica">
+
+                        <div class="icono">🛏️</div>
+
+                        <h3>Habitaciones cómodas</h3>
+
+                        <p>
+                            Espacios pensados para tu descanso.
+                        </p>
+
+                    </div>
+
+
+                    <div class="caracteristica">
+
+                        <div class="icono">✔️</div>
+
+                        <h3>Reserva segura</h3>
+
+                        <p>
+                            Tu reserva se gestiona de manera sencilla.
+                        </p>
+
+                    </div>
+
+
+                    <div class="caracteristica">
+
+                        <div class="icono">💳</div>
+
+                        <h3>Pago online</h3>
+
+                        <p>
+                            Proceso de pago simulado y seguro.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESULTADO DE BUSQUEDA -->
+            <div id="resultadoBusqueda"></div>
+
+        </section>
+
+
+        <!-- FORMULARIO DE RESERVA -->
+        <section id="formularioReserva" class="panel oculto">
+
+            <h2>Datos de la reserva</h2>
+
+            <p id="habitacionSeleccionada"></p>
+
+
+            <div class="form-group">
+
+                <label for="nombre">
+                    Nombre completo
+                </label>
+
+                <input type="text" id="nombre">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="correo">
+                    Correo electrónico
+                </label>
+
+                <input type="email" id="correo">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="telefono">
+                    Teléfono
+                </label>
+
+                <input type="tel" id="telefono">
+
+            </div>
+
+
+            <button onclick="continuarPago()">
+                Continuar con el pago
+            </button>
+
+            <div id="mensajeReserva"></div>
+
+        </section>
+
+
+        <!-- PAGO -->
+        <section id="pago" class="panel oculto">
+
+            <h2>Pago online</h2>
+
+            <p>
+                Este módulo corresponde a una simulación del proceso de pago.
+            </p>
+
+            <div class="form-group">
+
+                <label for="titular">
+                    Nombre del titular
+                </label>
+
+                <input type="text" id="titular">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="tarjeta">
+                    Número de tarjeta
+                </label>
+
+                <input
+                    type="text"
+                    id="tarjeta"
+                    maxlength="16"
+                    placeholder="Ingrese 16 dígitos"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="vencimiento">
+                    Fecha de vencimiento
+                </label>
+
+                <input
+                    type="month"
+                    id="vencimiento"
+                >
+
+            </div>
+
+
+            <button onclick="confirmarPago()">
+                Confirmar pago
+            </button>
+
+            <div id="mensajePago"></div>
+
+        </section>
+
+
+        <!-- MIS RESERVAS -->
+        <section id="misReservas" class="panel oculto">
+
+            <h2>Mis reservas</h2>
+
+            <div id="listaReservas">
+                <p>No hay reservas registradas.</p>
+            </div>
+
+        </section>
+
+
+        <!-- AYUDA -->
+        <section id="ayuda" class="panel oculto">
+
+            <h2>Ayuda</h2>
+
+            <p>
+                Para realizar una reserva, seleccione la fecha de entrada,
+                fecha de salida y número de huéspedes.
+            </p>
+
+            <p>
+                Después seleccione una habitación, registre sus datos
+                y complete el proceso de pago simulado.
+            </p>
+
+        </section>
+
+
+        <!-- LOGIN -->
+        <section id="login" class="panel oculto">
+
+            <h2>Inicio de sesión</h2>
+
+            <div class="form-group">
+
+                <label for="usuario">
+                    Usuario
+                </label>
+
+                <input type="text" id="usuario">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="clave">
+                    Contraseña
+                </label>
+
+                <input type="password" id="clave">
+
+            </div>
+
+
+            <button onclick="iniciarSesion()">
+                Ingresar
+            </button>
+
+            <div id="mensajeLogin"></div>
+
+        </section>
+
+
+        <!-- MENSAJE DE MENU -->
+        <section id="mensajeMenu" class="panel oculto">
+
+            <h2 id="tituloMenu"></h2>
+
+            <div class="mensaje">
+
+                <p>
+                    Esta opción forma parte del prototipo de
+                    HOTEL RESERVACIONES.
+                </p>
+
+                <p>
+                    Funcionalidad disponible como parte de la navegación
+                    del sistema.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- PIE DE PAGINA -->
 <footer>
-    <p>Hotel Reserva - Sistema de reservas en línea</p>
+
+    <p>
+        Hotel Reservaciones - Sistema de reservas en línea
+    </p>
+
 </footer>
+
 
 <script>
 
     let reservaActual = null;
+
     let reservas = [];
 
-    // Búsqueda de habitaciones
-    document.getElementById("formBusqueda").addEventListener("submit", function(event) {
 
-        event.preventDefault();
+    /* BUSQUEDA DE HABITACIONES */
 
-        const entrada = document.getElementById("entrada").value;
-        const salida = document.getElementById("salida").value;
-        const huespedes = document.getElementById("huespedes").value;
+    document
+        .getElementById("formBusqueda")
+        .addEventListener("submit", function(event) {
 
-        if (entrada === "" || salida === "") {
-            alert("Por favor, seleccione las fechas de entrada y salida.");
-            return;
+            event.preventDefault();
+
+            const entrada =
+                document.getElementById("entrada").value;
+
+            const salida =
+                document.getElementById("salida").value;
+
+            const huespedes =
+                Number(document.getElementById("huespedes").value);
+
+
+            if (entrada === "" || salida === "") {
+
+                alert(
+                    "Por favor, seleccione las fechas de entrada y salida."
+                );
+
+                return;
+            }
+
+
+            if (salida <= entrada) {
+
+                alert(
+                    "La fecha de salida debe ser posterior a la fecha de entrada."
+                );
+
+                return;
+            }
+
+
+            mostrarHabitaciones(
+                entrada,
+                salida,
+                huespedes
+            );
+
+        });
+
+
+    /* MOSTRAR HABITACIONES */
+
+    function mostrarHabitaciones(
+        entrada,
+        salida,
+        huespedes
+    ) {
+
+        const resultado =
+            document.getElementById("resultadoBusqueda");
+
+
+        let habitaciones = "";
+
+
+        if (huespedes <= 2) {
+
+            habitaciones += `
+
+                <div class="habitacion">
+
+                    <h3>
+                        Habitación Estándar
+                    </h3>
+
+                    <p>
+                        Capacidad: 2 huéspedes
+                    </p>
+
+                    <p class="precio">
+                        $180.000 por noche
+                    </p>
+
+                    <button
+                        onclick="seleccionarHabitacion(
+                            'Habitación Estándar',
+                            180000
+                        )"
+                    >
+                        Seleccionar
+                    </button>
+
+                </div>
+
+            `;
+
         }
 
-        if (salida <= entrada) {
-            alert("La fecha de salida debe ser posterior a la fecha de entrada.");
-            return;
+
+        if (huespedes <= 4) {
+
+            habitaciones += `
+
+                <div class="habitacion">
+
+                    <h3>
+                        Habitación Familiar
+                    </h3>
+
+                    <p>
+                        Capacidad: 4 huéspedes
+                    </p>
+
+                    <p class="precio">
+                        $280.000 por noche
+                    </p>
+
+                    <button
+                        onclick="seleccionarHabitacion(
+                            'Habitación Familiar',
+                            280000
+                        )"
+                    >
+                        Seleccionar
+                    </button>
+
+                </div>
+
+            `;
+
         }
 
-        mostrarHabitaciones(entrada, salida, huespedes);
-    });
 
+        if (huespedes <= 2) {
 
-    function mostrarHabitaciones(entrada, salida, huespedes) {
+            habitaciones += `
 
-        const resultado = document.getElementById("resultadoBusqueda");
+                <div class="habitacion">
+
+                    <h3>
+                        Habitación Suite
+                    </h3>
+
+                    <p>
+                        Capacidad: 2 huéspedes
+                    </p>
+
+                    <p class="precio">
+                        $350.000 por noche
+                    </p>
+
+                    <button
+                        onclick="seleccionarHabitacion(
+                            'Habitación Suite',
+                            350000
+                        )"
+                    >
+                        Seleccionar
+                    </button>
+
+                </div>
+
+            `;
+
+        }
+
 
         resultado.innerHTML = `
+
             <div class="mensaje">
-                <strong>Habitaciones disponibles</strong>
-                <p>Fechas: ${entrada} hasta ${salida}</p>
-                <p>Huéspedes: ${huespedes}</p>
+
+                <strong>
+                    Habitaciones disponibles
+                </strong>
+
+                <p>
+                    Fechas: ${entrada} hasta ${salida}
+                </p>
+
+                <p>
+                    Huéspedes: ${huespedes}
+                </p>
+
             </div>
 
-            <div class="habitacion">
-                <h3>Habitación Estándar</h3>
-                <p>Capacidad: 2 huéspedes</p>
-                <p>Precio: $180.000 por noche</p>
-                <button onclick="seleccionarHabitacion('Habitación Estándar', 180000)">
-                    Seleccionar
-                </button>
-            </div>
+            ${habitaciones}
 
-            <div class="habitacion">
-                <h3>Habitación Familiar</h3>
-                <p>Capacidad: 4 huéspedes</p>
-                <p>Precio: $280.000 por noche</p>
-                <button onclick="seleccionarHabitacion('Habitación Familiar', 280000)">
-                    Seleccionar
-                </button>
-            </div>
-
-            <div class="habitacion">
-                <h3>Habitación Suite</h3>
-                <p>Capacidad: 2 huéspedes</p>
-                <p>Precio: $350.000 por noche</p>
-                <button onclick="seleccionarHabitacion('Habitación Suite', 350000)">
-                    Seleccionar
-                </button>
-            </div>
         `;
+
     }
 
 
-    function seleccionarHabitacion(nombre, precio) {
+    /* SELECCIONAR HABITACION */
+
+    function seleccionarHabitacion(
+        nombre,
+        precio
+    ) {
 
         reservaActual = {
+
             habitacion: nombre,
+
             precio: precio,
-            entrada: document.getElementById("entrada").value,
-            salida: document.getElementById("salida").value,
-            huespedes: document.getElementById("huespedes").value
+
+            entrada:
+                document.getElementById("entrada").value,
+
+            salida:
+                document.getElementById("salida").value,
+
+            huespedes:
+                document.getElementById("huespedes").value
+
         };
 
-        document.getElementById("habitacionSeleccionada").innerHTML =
-            "Habitación seleccionada: <strong>" + nombre + "</strong> - $" +
-            precio.toLocaleString("es-CO") + " por noche.";
+
+        document
+            .getElementById("habitacionSeleccionada")
+            .innerHTML =
+
+            "Habitación seleccionada: <strong>"
+            + nombre
+            + "</strong> - $"
+            + precio.toLocaleString("es-CO")
+            + " por noche.";
+
 
         ocultarSecciones();
 
-        document.getElementById("formularioReserva").classList.remove("oculto");
+
+        document
+            .getElementById("formularioReserva")
+            .classList
+            .remove("oculto");
+
 
         window.scrollTo(0, 0);
+
     }
 
 
-    function confirmarReserva() {
+    /* CONTINUAR AL PAGO */
 
-        const nombre = document.getElementById("nombre").value;
-        const correo = document.getElementById("correo").value;
-        const telefono = document.getElementById("telefono").value;
+    function continuarPago() {
 
-        if (nombre === "" || correo === "" || telefono === "") {
-            alert("Complete todos los datos de la reserva.");
+        const nombre =
+            document.getElementById("nombre").value;
+
+        const correo =
+            document.getElementById("correo").value;
+
+        const telefono =
+            document.getElementById("telefono").value;
+
+
+        if (
+            nombre === ""
+            || correo === ""
+            || telefono === ""
+        ) {
+
+            alert(
+                "Complete todos los datos de la reserva."
+            );
+
             return;
         }
 
+
         reservaActual.nombre = nombre;
+
         reservaActual.correo = correo;
+
         reservaActual.telefono = telefono;
+
+
+        ocultarSecciones();
+
+
+        document
+            .getElementById("pago")
+            .classList
+            .remove("oculto");
+
+
+        window.scrollTo(0, 0);
+
+    }
+
+
+    /* CONFIRMAR PAGO */
+
+    function confirmarPago() {
+
+        const titular =
+            document.getElementById("titular").value;
+
+        const tarjeta =
+            document.getElementById("tarjeta").value;
+
+        const vencimiento =
+            document.getElementById("vencimiento").value;
+
+
+        if (
+            titular === ""
+            || tarjeta === ""
+            || vencimiento === ""
+        ) {
+
+            alert(
+                "Complete todos los datos del pago."
+            );
+
+            return;
+        }
+
+
+        if (
+            tarjeta.length !== 16
+            || isNaN(tarjeta)
+        ) {
+
+            alert(
+                "El número de tarjeta debe contener 16 dígitos."
+            );
+
+            return;
+        }
+
 
         reservas.push(reservaActual);
 
-        document.getElementById("mensajeReserva").innerHTML = `
-            <div class="mensaje">
-                <strong>¡Reserva registrada correctamente!</strong>
-                <p>Cliente: ${nombre}</p>
-                <p>Habitación: ${reservaActual.habitacion}</p>
-                <p>Entrada: ${reservaActual.entrada}</p>
-                <p>Salida: ${reservaActual.salida}</p>
-                <p>Huéspedes: ${reservaActual.huespedes}</p>
-                <p>Correo: ${correo}</p>
-            </div>
-        `;
+
+        document
+            .getElementById("mensajePago")
+            .innerHTML = `
+
+                <div class="confirmacion">
+
+                    <h3>
+                        ¡Reserva confirmada!
+                    </h3>
+
+                    <p>
+                        Cliente:
+                        ${reservaActual.nombre}
+                    </p>
+
+                    <p>
+                        Habitación:
+                        ${reservaActual.habitacion}
+                    </p>
+
+                    <p>
+                        Entrada:
+                        ${reservaActual.entrada}
+                    </p>
+
+                    <p>
+                        Salida:
+                        ${reservaActual.salida}
+                    </p>
+
+                    <p>
+                        Huéspedes:
+                        ${reservaActual.huespedes}
+                    </p>
+
+                    <p>
+                        Estado del pago:
+                        <strong>Procesado correctamente</strong>
+                    </p>
+
+                </div>
+
+            `;
+
 
         reservaActual = null;
+
     }
 
+
+    /* MIS RESERVAS */
 
     function mostrarReservas() {
 
         ocultarSecciones();
 
-        document.getElementById("misReservas").classList.remove("oculto");
 
-        const lista = document.getElementById("listaReservas");
+        document
+            .getElementById("misReservas")
+            .classList
+            .remove("oculto");
+
+
+        const lista =
+            document.getElementById("listaReservas");
+
 
         if (reservas.length === 0) {
-            lista.innerHTML = "<p>No hay reservas registradas.</p>";
+
+            lista.innerHTML =
+                "<p>No hay reservas registradas.</p>";
+
             return;
         }
 
+
         lista.innerHTML = "";
 
-        reservas.forEach(function(reserva, indice) {
 
-            lista.innerHTML += `
-                <div class="reserva">
-                    <strong>${reserva.habitacion}</strong>
-                    <p>Cliente: ${reserva.nombre}</p>
-                    <p>Entrada: ${reserva.entrada}</p>
-                    <p>Salida: ${reserva.salida}</p>
-                    <p>Huéspedes: ${reserva.huespedes}</p>
-                    <button class="cancelar" onclick="cancelarReserva(${indice})">
-                        Cancelar reserva
-                    </button>
-                </div>
-            `;
-        });
+        reservas.forEach(
+            function(reserva, indice) {
+
+                lista.innerHTML += `
+
+                    <div class="reserva">
+
+                        <strong>
+                            ${reserva.habitacion}
+                        </strong>
+
+                        <p>
+                            Cliente:
+                            ${reserva.nombre}
+                        </p>
+
+                        <p>
+                            Entrada:
+                            ${reserva.entrada}
+                        </p>
+
+                        <p>
+                            Salida:
+                            ${reserva.salida}
+                        </p>
+
+                        <p>
+                            Huéspedes:
+                            ${reserva.huespedes}
+                        </p>
+
+                        <button
+                            class="cancelar"
+                            onclick="cancelarReserva(${indice})"
+                        >
+                            Cancelar reserva
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
     }
 
 
+    /* CANCELAR RESERVA */
+
     function cancelarReserva(indice) {
 
-        if (confirm("¿Desea cancelar esta reserva?")) {
+        if (
+            confirm(
+                "¿Desea cancelar esta reserva?"
+            )
+        ) {
 
             reservas.splice(indice, 1);
 
             mostrarReservas();
 
-            alert("La reserva fue cancelada correctamente.");
+            alert(
+                "La reserva fue cancelada correctamente."
+            );
+
         }
+
     }
 
+
+    /* INICIO */
 
     function mostrarInicio() {
 
         ocultarSecciones();
 
-        document.getElementById("inicio").classList.remove("oculto");
+
+        document
+            .getElementById("inicio")
+            .classList
+            .remove("oculto");
+
 
         window.scrollTo(0, 0);
+
     }
 
+
+    /* AYUDA */
 
     function mostrarAyuda() {
 
         ocultarSecciones();
 
-        document.getElementById("ayuda").classList.remove("oculto");
+
+        document
+            .getElementById("ayuda")
+            .classList
+            .remove("oculto");
+
 
         window.scrollTo(0, 0);
+
     }
 
+
+    /* LOGIN */
 
     function mostrarLogin() {
 
         ocultarSecciones();
 
-        document.getElementById("login").classList.remove("oculto");
+
+        document
+            .getElementById("login")
+            .classList
+            .remove("oculto");
+
 
         window.scrollTo(0, 0);
+
     }
 
+
+    /* OPCIONES DEL MENU LATERAL */
+
+    function mostrarMensajeMenu(opcion) {
+
+        ocultarSecciones();
+
+
+        document
+            .getElementById("mensajeMenu")
+            .classList
+            .remove("oculto");
+
+
+        document
+            .getElementById("tituloMenu")
+            .textContent = opcion;
+
+
+        window.scrollTo(0, 0);
+
+    }
+
+
+    /* OCULTAR SECCIONES */
 
     function ocultarSecciones() {
 
-        document.getElementById("inicio").classList.add("oculto");
-        document.getElementById("formularioReserva").classList.add("oculto");
-        document.getElementById("misReservas").classList.add("oculto");
-        document.getElementById("ayuda").classList.add("oculto");
-        document.getElementById("login").classList.add("oculto");
+        document
+            .getElementById("inicio")
+            .classList
+            .add("oculto");
+
+        document
+            .getElementById("formularioReserva")
+            .classList
+            .add("oculto");
+
+        document
+            .getElementById("pago")
+            .classList
+            .add("oculto");
+
+        document
+            .getElementById("misReservas")
+            .classList
+            .add("oculto");
+
+        document
+            .getElementById("ayuda")
+            .classList
+            .add("oculto");
+
+        document
+            .getElementById("login")
+            .classList
+            .add("oculto");
+
+        document
+            .getElementById("mensajeMenu")
+            .classList
+            .add("oculto");
+
     }
 
 
+    /* LOGIN SIMULADO */
+
     function iniciarSesion() {
 
-        const usuario = document.getElementById("usuario").value;
-        const clave = document.getElementById("clave").value;
+        const usuario =
+            document.getElementById("usuario").value;
 
-        if (usuario === "" || clave === "") {
+        const clave =
+            document.getElementById("clave").value;
 
-            document.getElementById("mensajeLogin").innerHTML =
-                "<div class='mensaje'>Ingrese usuario y contraseña.</div>";
+
+        if (
+            usuario === ""
+            || clave === ""
+        ) {
+
+            document
+                .getElementById("mensajeLogin")
+                .innerHTML =
+                "<div class='mensaje'>"
+                + "Ingrese usuario y contraseña."
+                + "</div>";
 
             return;
         }
 
-        document.getElementById("mensajeLogin").innerHTML =
-            "<div class='mensaje'><strong>Inicio de sesión simulado correctamente.</strong></div>";
+
+        document
+            .getElementById("mensajeLogin")
+            .innerHTML =
+
+            "<div class='confirmacion'>"
+            + "<strong>"
+            + "Inicio de sesión simulado correctamente."
+            + "</strong>"
+            + "</div>";
+
     }
 
 </script>
